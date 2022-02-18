@@ -1,22 +1,26 @@
+import Cookies from  './js.cookie.mjs'
+
+function getCard() {
+  return (Cookies.get('tuni-library-card') ? Cookies.get('tuni-library-card') : '2500000000');
+}
+
+
 var defaultValues = {
 
-    CODE39 : "2500000000",
+    CODE39 : getCard()
    
 };
-
+console.log(getCard());
 $(document).ready(function(){
+    $("#userInput").val(getCard());
     $("#userInput").on('input',newBarcode);
-    $("#barcodeType").change(function(){
-        $("#userInput").val( defaultValues[$(this).val()] );
-
-        newBarcode();
-    });
-
     newBarcode();
 });
 
 var newBarcode = function() {
     //Convert to boolean
+    
+    Cookies.set('tuni-library-card',$("#userInput").val(), {expires: 365, secure: true, sameSite: 'strict'})
     $("#barcode").JsBarcode(
         $("#userInput").val(),
         {
