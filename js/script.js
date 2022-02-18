@@ -1,4 +1,4 @@
-import Cookies from  './js.cookie.mjs'
+import Cookies from  './js.cookie.js'
 
 function getCard() {
   return (Cookies.get('tuni-library-card') ? Cookies.get('tuni-library-card') : '2500000000');
@@ -10,7 +10,7 @@ var defaultValues = {
     CODE39 : getCard()
    
 };
-console.log(getCard());
+
 $(document).ready(function(){
     $("#userInput").val(getCard());
     $("#userInput").on('input',newBarcode);
@@ -20,9 +20,9 @@ $(document).ready(function(){
 var newBarcode = function() {
     //Convert to boolean
     
-    Cookies.set('tuni-library-card',$("#userInput").val(), {expires: 365, secure: true, sameSite: 'strict'})
+    Cookies.set('tuni-library-card',$("#userInput").val().trim().replaceAll('\.',''), {expires: 365, secure: true, sameSite: 'strict'})
     $("#barcode").JsBarcode(
-        $("#userInput").val(),
+        $("#userInput").val().trim().replaceAll('\.',''),
         {
           "format": 'CODE39',
           "background": "#FFFFFF",
