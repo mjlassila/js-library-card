@@ -1,7 +1,19 @@
 import Cookies from  './js.cookie.js'
 
 function getCard() {
-  return (Cookies.get('tuni-library-card') ? Cookies.get('tuni-library-card') : '2500000000');
+  var card_barcode;
+  var cookie_barcode = Cookies.get('tuni-library-card');
+  if (cookie_barcode && cookie_barcode != '2500000000' & window.location.hash == '') {
+    card_barcode = Cookies.get('tuni-library-card');
+  } else if (window.location.hash.substring(1)) {
+    card_barcode = window.location.hash.substring(1);
+    Cookies.set('tuni-library-card',card_barcode.trim().replaceAll('\.',''), {expires: 365, secure: true, sameSite: 'strict'})
+  } else {
+    card_barcode = '2500000000';
+  }
+  
+  return card_barcode;
+
 }
 
 
@@ -10,6 +22,15 @@ var defaultValues = {
     CODE39 : getCard()
    
 };
+
+
+function updateFromHash() {
+  $("#userInput").val(window.location.hash.substring(1));
+  newBarcode();
+}
+
+window.addEventListener('hashchange', updateFromHash, false);
+
 
 $(document).ready(function(){
     $("#userInput").val(getCard());
