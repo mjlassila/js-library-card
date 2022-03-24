@@ -13,7 +13,7 @@ Credits: [mpitka](https://github.com/mpitka/)
 
 ## custom.js
 
-```
+```JavaScript
     app.component('prmPersonalInfoAfter', {
         controller: 'bcode',
         template: '<div ng-if="$ctrl.getId()" style="background-color:#f3f3f3;display:block;margin:0 8px 0 8px;padding:15px 26px 15px 26px;">Kirjastokortti | Librarycard: &nbsp;<a href="https://yourserver/librarycard/#{{$ctrl.getId()}}" target="_blank">{{$ctrl.getId()}}</a></div>'
@@ -35,16 +35,13 @@ Credits: [mpitka](https://github.com/mpitka/)
         }
     }]);
 
-    ```
+```
 
 ## custom.css
 
-```
+```CSS
 /* Hide extra user info, as identifier is needed only for creating link to library card */
 .user-info-section {
   display:none;
 }
-
-
-
 ```
