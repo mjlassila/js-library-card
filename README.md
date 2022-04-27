@@ -23,7 +23,7 @@ Credits: [mpitka](https://github.com/mpitka/)
         bcode.getId = getId;
         function getId() {
             var ids = document.getElementsByClassName("margin-left-medium");
-            if (typeof ids[0] !== 'undefined') {
+            if (typeof ids[0] !== 'undefined' && typeof ids[1] !== 'undefined') {
                 if (!ids[0].innerHTML.toString().startsWith('25') && ids[0].length != '10') {
                     ids[0].innerHTML = ids[1].innerHTML;
                     return ids[0].innerHTML;
@@ -31,6 +31,8 @@ Credits: [mpitka](https://github.com/mpitka/)
                     ids[1].innerHTML = ids[0].innerHTML;
                     return ids[1].innerHTML;
                 }
+            } else if (typeof ids[0] !== 'undefined') {
+                return ids[0].innerHTML;
             }
         }
     }]);
